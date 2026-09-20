@@ -16,20 +16,21 @@ const Cliente = {
     },
 
     crearPedido: function(idProducto, cantidad) {  //crea el pedido
-        const productos = Cocina.listar();
+        const productos = Cocina.listar();      //guardamos la lista del menu en la variable productos
         const productoEncontrado = productos.find(p => p.id == idProducto);
-
+//busca el id del producto introducido en los parametros, y si encuentra coincidencia lo guarda en la variable productoEncontrado
         if(productoEncontrado) {
-            const totalPedido = productoEncontrado.precio * cantidad;
+            const totalPedido = productoEncontrado.precio * cantidad;//multiplica el precio por la cantidad para calcular el total
 
+            //guardamos un objeto con los siguientes datos 
             const pedido = {
                 producto: productoEncontrado.nombre,
                 cantidad: cantidad,
                 total: totalPedido
             };
 
-            pedidosDeCliente.push(pedido);
-            Caja.agregarPedido(pedido);
+            pedidosDeCliente.push(pedido); //agregamos el pedido a la lista de pedidos
+            Caja.agregarPedido(pedido);//mandamos el pedido a la caja
 
             console.log(`Pedido realizado: ${productoEncontrado.nombre} x${cantidad} ($${totalPedido})`);
             return pedido;
@@ -38,20 +39,23 @@ const Cliente = {
         }
     },
 
+
+    //esta funcion enlista los pedidos del cliente 
     listaPedidos: function() {
         console.log("\n Pedidos del Cliente");
-        if(pedidosDeCliente.length == 0) {
+        if(pedidosDeCliente.length == 0) {   //verificamos si hay pedidos 
             console.log("No tienes ningun pedido");
             return;
         }
-        let totalPagar = 0;
+     
+        //reecorremos el arreglo de pedidos y mostramos cada uno, cada elemento es un objeto tipo pedido 
         pedidosDeCliente.forEach((pedido, index) => {
             console.log(`${index + 1}. ${pedido.producto} x ${pedido.cantidad}`);
-            totalPagar += pedido.total;
+           
         });
       
     }
 
 };
 
-module.exports = Cliente;
+module.exports = Cliente;  //exportamos cliente para usarlo en el main 
