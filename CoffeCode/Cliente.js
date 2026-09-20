@@ -46,10 +46,10 @@ const Cliente = {
         }
         let totalPagar = 0;
         pedidosDeCliente.forEach((pedido, index) => {
-            console.log(`${index + 1}. ${pedido.producto} x ${pedido.cantidad} = $${pedido.total}`);
+            console.log(`${index + 1}. ${pedido.producto} x ${pedido.cantidad}`);
             totalPagar += pedido.total;
         });
-        console.log(`Total a pagar: $${totalPagar}`);
+      
     }
 
 };
