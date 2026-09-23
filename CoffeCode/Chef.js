@@ -35,6 +35,23 @@ listar: function() {
 module.exports = Cocina; 
 
 
+/* Agregar Promociones, consultar productos baratos/caros y buscar productos */
 
+
+
+
+Promociones = {id: 1, nombre: "Descuento 10%", descuento: 0.1,
+              id: 2, nombre: "Descuento 20%", descuento: 0.2,
+              id: 3, nombre: "Descuento 30%", descuento: 0.3};
+
+let AgregarPromociones = {
+    agregarPromocion: function(id, nombre, descuento) {
+        const nuevaPromocion = {id: id, nombre: nombre, descuento: descuento};
+        inventarioProductos.push(Promociones);
+    }
+};
+
+
+module.exports = AgregarPromociones;
 
 
