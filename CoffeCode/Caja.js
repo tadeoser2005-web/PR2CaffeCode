@@ -1,4 +1,4 @@
-const listaDePedidos = [];
+let listaDePedidos = [];
 let totalAcumulado = 0;
 
 const caja = {

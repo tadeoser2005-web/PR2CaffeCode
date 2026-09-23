@@ -42,7 +42,7 @@ const Cliente = {
 
     //esta funcion enlista los pedidos del cliente 
     listaPedidos: function() {
-        console.log("\n Pedidos del Cliente");
+        console.log(" Pedidos del Cliente");
         if(pedidosDeCliente.length == 0) {   //verificamos si hay pedidos 
             console.log("No tienes ningun pedido");
             return;
@@ -57,5 +57,8 @@ const Cliente = {
     }
 
 };
+
+
+
 
 module.exports = Cliente;  //exportamos cliente para usarlo en el main 
