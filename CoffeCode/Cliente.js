@@ -5,6 +5,8 @@ const pedidosDeCliente = [];
 
 const Cliente = {
 
+
+    //consulta los productos disponibles con el map y el forEach
     consultarProductos: function() {
         console.log("\nProductos disponibles");
         const productos = Cocina.listar();   

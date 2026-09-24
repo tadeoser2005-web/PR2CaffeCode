@@ -3,7 +3,7 @@ let inventarioProductos = [];
 const promociones = [
     { id: 1, nombre: "Descuento 10% en Cafes", descuento: 0.1 },
     { id: 2, nombre: "Descuento 20% en Postres", descuento: 0.2 },
-    { id: 3, nombre: "Descuento 30% en Te", descuento: 0.3 }
+    { id: 3, nombre: "Descuento 30% en Almuerzos", descuento: 0.3 }
 ];
 
 const Cocina = {
@@ -37,15 +37,15 @@ const Cocina = {
     },
 
     buscarCaros: function() {
-        return inventarioProductos.filter(p => p.precio >= 40);
+        return inventarioProductos.filter(p => p.precio >= 140);
     },
 
     buscarBebidas: function() {
-        return inventarioProductos.filter(p => p.categoria === "bebida");
+        return inventarioProductos.find(p => p.categoria === "bebida");
     },
 
     buscarPostres: function() {
-        return inventarioProductos.filter(p => p.categoria === "postre");
+        return inventarioProductos.find(p => p.categoria === "postre");
     }
 };
 

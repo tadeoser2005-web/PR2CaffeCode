@@ -111,7 +111,7 @@ function menu() {
                 break;
 
             default:
-                console.log("Opcion no valida.");
+                console.log("Opcion no valida1");
                 menu();
                 break;
         }
