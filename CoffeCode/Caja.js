@@ -1,37 +1,36 @@
+```js
 let listaDePedidos = [];
 let totalAcumulado = 0;
 
 const caja = {
     //agrega el pedido a la lista
-        agregarPedido: function(pedido) {
+    agregarPedido: function(pedido) {
         listaDePedidos.push(pedido);
         totalAcumulado += pedido.total;
     },
 
     totalVenta: function() {
         //se utiliza reduce y dertructuring en listaDePedidos
-        const{ subtotal, iva, total} = listaDePedidos.reduce(
+        const { subtotal, iva, total } = listaDePedidos.reduce(
             (acumulador, pedido) => {
-                
-                const {total} = pedido;//aqui se utiliza solo destructuring para sacar total de pedidos
+
+                const { total } = pedido;//aqui se utiliza solo destructuring para sacar total de pedidos
                 acumulador.subtotal += total;
                 return acumulador;
             },
-            {subtotal: 0, iva: 0, total: 0}
-        };
+            { subtotal: 0, iva: 0, total: 0 }
+        );
 
         const ivaCalculado = subtotal * .16;
         const totalFinal = subtotal + ivaCalculado;
-        consolo.log("total de pedidos: " ${listaDePedidos.length}");
-        console.log("subtotal: $${subtotal.toFixed(2)}");
-        console.log("iva: $${ivaCalculado.toFixed(2)}");
-        console.log("total: $${totalFinal.toFixed(2)}");
 
-        
-
-
-       
+        console.log(`total de pedidos: ${listaDePedidos.length}`);
+        console.log(`subtotal: $${subtotal.toFixed(2)}`);
+        console.log(`iva: $${ivaCalculado.toFixed(2)}`);
+        console.log(`total: $${totalFinal.toFixed(2)}`);
     }
 };
 
 module.exports = caja; //exportamos caja para que otros archivo puedan usarlo
+```
+
