@@ -1,4 +1,3 @@
-```js
 let listaDePedidos = [];
 let totalAcumulado = 0;
 
@@ -32,5 +31,4 @@ const caja = {
 };
 
 module.exports = caja; //exportamos caja para que otros archivo puedan usarlo
-```
 
