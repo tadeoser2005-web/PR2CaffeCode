@@ -33,7 +33,7 @@ const Cliente = {
 
         if(productoEncontrado) {
             if (productoEncontrado.stock < cantidad) {
-                console.log(`No hay suficiente stock. Stock disponible: ${productoEncontrado.stock}`);
+                console.log(`No hay suficiente stock Stock disponible: ${productoEncontrado.stock}`);
                 return;
             }
 
