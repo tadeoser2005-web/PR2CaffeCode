@@ -7,6 +7,8 @@ const pedidosDeCliente = [];
 
 const Cliente = {
 
+
+    //consulta los productos disponibles con el map y el forEach
     consultarProductos: function() {
         console.log("Menu ");
         const productos = Cocina.listar();   //mediante cociana manda a llamar el metodo listar q retorna el "menu"
@@ -20,7 +22,18 @@ const Cliente = {
         const productoEncontrado = productos.find(p => p.id == idProducto);
 //busca el id del producto introducido en los parametros, y si encuentra coincidencia lo guarda en la variable productoEncontrado
         if(productoEncontrado) {
-            const totalPedido = productoEncontrado.precio * cantidad;//multiplica el precio por la cantidad para calcular el total
+            if (productoEncontrado.stock < cantidad) {
+                console.log(`No hay suficiente stock Stock disponible: ${productoEncontrado.stock}`);
+                return;
+            }
+
+            productoEncontrado.stock -= cantidad;
+
+            if (productoEncontrado.stock <= 0) {
+                Cocina.eliminar(productoEncontrado.id);
+            }
+
+            const totalPedido = productoEncontrado.precio * cantidad;
 
             //guardamos un objeto con los siguientes datos 
             const pedido = {
