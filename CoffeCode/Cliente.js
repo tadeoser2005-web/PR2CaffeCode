@@ -17,40 +17,39 @@ const Cliente = {
         });
     },
 
-    crearPedido: function(idProducto, cantidad) {  //crea el pedido
-        const productos = Cocina.listar();      //guardamos la lista del menu en la variable productos
+      crearPedido: function(idProducto, cantidad) {
+        const productos = Cocina.listar();
         const productoEncontrado = productos.find(p => p.id == idProducto);
-//busca el id del producto introducido en los parametros, y si encuentra coincidencia lo guarda en la variable productoEncontrado
-        if(productoEncontrado) {
-            if (productoEncontrado.stock < cantidad) {
-                console.log(`No hay suficiente stock Stock disponible: ${productoEncontrado.stock}`);
-                return;
-            }
 
-            productoEncontrado.stock -= cantidad;
+        if (productoEncontrado) {
+            
+           //podemos jugar con los boolean para forzar el error, no hay falla
+            Cocina.prepararPedido(productoEncontrado.nombre, false, false) 
+                .then((mensajeExito) => {
+                    // este es el caso de q la promesa termine bien, parece un try-catch
+                    console.log(mensajeExito);
 
-            if (productoEncontrado.stock <= 0) {
-                Cocina.eliminar(productoEncontrado.id);
-            }
+                    const totalPedido = productoEncontrado.precio * cantidad;
+                    const pedido = {
+                        producto: productoEncontrado.nombre,
+                        cantidad: cantidad,
+                        total: totalPedido
+                    };
 
-            const totalPedido = productoEncontrado.precio * cantidad;
+                    pedidosDeCliente.push(pedido);
+                    Caja.agregarPedido(pedido);
+                    console.log(`Pedido guardado con exito!`);
+                })
+                .catch((errorCocina) => {  //errorCocina es un parametro, imprime lo q hay en el reject dependiendo los parametros de preparar pedido
+                    // en caso de que la promesa termine mal
+                    console.log("No se pudo realizar el pedido -> " + errorCocina);
+                });
 
-            //guardamos un objeto con los siguientes datos 
-            const pedido = {
-                producto: productoEncontrado.nombre,
-                cantidad: cantidad,
-                total: totalPedido
-            };
-
-            pedidosDeCliente.push(pedido); //agregamos el pedido a la lista de pedidos
-            Caja.agregarPedido(pedido);//mandamos el pedido a la caja
-
-            console.log(`Pedido realizado: ${productoEncontrado.nombre} x${cantidad} ($${totalPedido})`);
-            return pedido;
         } else {
             console.log(`Producto con ID ${idProducto} no encontrado`);
         }
     },
+
 
 
     //esta funcion enlista los pedidos del cliente 

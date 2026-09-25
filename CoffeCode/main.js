@@ -14,7 +14,7 @@ Cocina.agregar(2, "cafe", 40);
 Cocina.agregar(3, "te", 35);
 
 function menu() {
-    console.log("\n--- MENU CAFETERIA ---");
+    console.log("\nCoffeCode");
     console.log("1. Agregar producto (Cocina)");
     console.log("2. Editar producto (Cocina)");
     console.log("3. Eliminar producto (Cocina)");
@@ -83,12 +83,12 @@ menu();
 break;
 
 case '8':
-console.log("Saliendo del programa...");
+console.log("GGS NEXT");
 rl.close();
 break;
 
 default:
-console.log("Opcion no valida.");
+console.log("Eror en capa 8 ");
 menu();
 break;
 }

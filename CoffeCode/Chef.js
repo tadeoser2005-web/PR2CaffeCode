@@ -57,6 +57,23 @@ listar: function() {
 
     obtenerPromociones: function() {
         return promociones;
+    },
+
+    // simular preparacion del pedido con promesas
+    prepararPedido: function(nombreProducto, tieneIngredientes = true, hayErrorCocina = false) {
+        return new Promise((resolve, reject) => {
+            console.log("Preparando " + nombreProducto + "...");
+
+            setTimeout(() => {
+                if (hayErrorCocina) {
+                    reject("Error en cocina: Ocurrio un problema con los equipos al preparar " + nombreProducto);
+                } else if (!tieneIngredientes) {
+                    reject("Faltan ingredientes: No se tienen los insumos suficientes para " + nombreProducto);
+                } else {
+                    resolve("El pedido de " + nombreProducto + " esta listo!");
+                }
+            }, 2000);
+        });
     }
 };
 
