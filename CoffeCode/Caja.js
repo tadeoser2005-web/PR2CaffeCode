@@ -27,6 +27,9 @@ const caja = {
         console.log(`subtotal: $${subtotal.toFixed(2)}`);
         console.log(`iva: $${ivaCalculado.toFixed(2)}`);
         console.log(`total: $${totalFinal.toFixed(2)}`);
+    },
+    estadoPedido: function(mensaje){
+        console.log("caja: ->" + mensaje);
     }
 };
 
