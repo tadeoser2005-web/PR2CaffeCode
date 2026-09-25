@@ -60,16 +60,19 @@ listar: function() {
     },
 
     // simular preparacion del pedido con promesas
-    prepararPedido: function(nombreProducto, tieneIngredientes = true, hayErrorCocina = false) {
+    prepararPedido: function(nombreProducto, callback, tieneIngredientes = true, hayErrorCocina = false) {
         return new Promise((resolve, reject) => {
             console.log("Preparando " + nombreProducto + "...");
 
             setTimeout(() => {
                 if (hayErrorCocina) {
+                    callback("Pedido cancelado");
                     reject("Error en cocina: Ocurrio un problema con los equipos al preparar " + nombreProducto);
                 } else if (!tieneIngredientes) {
+                    callback("Pedido cancelado");
                     reject("Faltan ingredientes: No se tienen los insumos suficientes para " + nombreProducto);
                 } else {
+                    callback("Pedido listo");
                     resolve("El pedido de " + nombreProducto + " esta listo!");
                 }
             }, 2000);
