@@ -24,7 +24,12 @@ const Cliente = {
         if (productoEncontrado) {
             
            //podemos jugar con los boolean para forzar el error, no hay falla
-            Cocina.prepararPedido(productoEncontrado.nombre, false, false) 
+            Cocina.prepararPedido(productoEncontrado.nombre,
+                function(mensaje){
+                    Caja.estadoPedido(mensaje);
+
+                },
+                 false, false) 
                 .then((mensajeExito) => {
                     // este es el caso de q la promesa termine bien, parece un try-catch
                     console.log(mensajeExito);
