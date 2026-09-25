@@ -65,8 +65,8 @@ break;
 
 case '5':
 rl.question("ID del producto a pedir: ", function(idProducto) {
-rl.question("Cantidad: ", function(cantidad) {
-Cliente.crearPedido(Number(idProducto), Number(cantidad));
+rl.question("Cantidad: ", async function(cantidad) {
+await Cliente.crearPedido(Number(idProducto), Number(cantidad));
 menu();
 });
     });

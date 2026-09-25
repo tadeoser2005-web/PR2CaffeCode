@@ -17,38 +17,41 @@ const Cliente = {
         });
     },
 
-      crearPedido: function(idProducto, cantidad) {
+      crearPedido: async function(idProducto, cantidad) {
         const productos = Cocina.listar();
         const productoEncontrado = productos.find(p => p.id == idProducto);
 
         if (productoEncontrado) {
-            
-           //podemos jugar con los boolean para forzar el error, no hay falla
-            Cocina.prepararPedido(productoEncontrado.nombre,
-                function(mensaje){
-                    Caja.estadoPedido(mensaje);
+            console.log(`Pedido recibido: ${cantidad} ${productoEncontrado.nombre}`);
 
-                },
-                 false, false) 
-                .then((mensajeExito) => {
-                    // este es el caso de q la promesa termine bien, parece un try-catch
-                    console.log(mensajeExito);
+            try {
+                const mensajeExito = await Cocina.prepararPedido(
+                    productoEncontrado.nombre,
+                    function(mensaje) {
+                        Caja.estadoPedido(mensaje);
+                    },
+                    true,
+                    false
+                );
+                console.log(mensajeExito);
+                console.log("Empacando pedido...");
+                await new Promise(resolve => setTimeout(resolve, 1500));
 
-                    const totalPedido = productoEncontrado.precio * cantidad;
-                    const pedido = {
-                        producto: productoEncontrado.nombre,
-                        cantidad: cantidad,
-                        total: totalPedido
-                    };
+                const totalPedido = productoEncontrado.precio * cantidad;
+                const pedido = {
+                    producto: productoEncontrado.nombre,
+                    cantidad: cantidad,
+                    total: totalPedido
+                };
 
-                    pedidosDeCliente.push(pedido);
-                    Caja.agregarPedido(pedido);
-                    console.log(`Pedido guardado con exito!`);
-                })
-                .catch((errorCocina) => {  //errorCocina es un parametro, imprime lo q hay en el reject dependiendo los parametros de preparar pedido
-                    // en caso de que la promesa termine mal
-                    console.log("No se pudo realizar el pedido -> " + errorCocina);
-                });
+                pedidosDeCliente.push(pedido);
+                Caja.agregarPedido(pedido);
+                console.log("Pedido entregado");
+                console.log("Pedido guardado con exito!");
+            } catch (errorCocina) {
+                console.log("Pedido cancelado");
+                console.log("No se pudo realizar el pedido -> " + errorCocina);
+            }
 
         } else {
             console.log(`Producto con ID ${idProducto} no encontrado`);
